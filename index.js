@@ -1,7 +1,6 @@
 class Formatter {
   static capitalize(string) {
-    return string.charAt(0).toUpperCase() + 
-    string.slice(1)
+    return string.charAt(0).toUpperCase() + string.slice(1)
   }
   
   static sanitize(string) {
@@ -12,14 +11,26 @@ class Formatter {
     let words = string.split(" ");
     let noCaps = ["the", "a", "an", "but", "of", "and", "for", "at", "by", "from"]
 
-    function selectiveCapitalization(word) {
-      if (noCaps.includes(word)) {
-        return word
+    // function selectiveCapitalization(word) {
+    //   if (noCaps.includes(word)) {
+    //     return word
+    //   } else {
+    //     return this.capitalize(word)
+    //   }
+    // }
+    let titleArray = []
+
+    for(let i = 0; i < words.length; i++) {
+      if (i === 0) {
+        titleArray[0] = this.capitalize(words[i])
       } else {
-        return this.capitalize(word)
-      }
+        if (!noCaps.includes(words[i])) {
+          titleArray.push(this.capitalize(words[i]))
+        } else {
+          titleArray.push(words[i])
+        }}
     }
-    return words.map(selectiveCapitalization).join(" ")
+    return titleArray.join(" ")
   }
 
 }
